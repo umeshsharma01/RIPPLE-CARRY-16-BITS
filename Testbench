@@ -1,0 +1,58 @@
+module ripple_16_tb;
+
+reg [15:0] a;
+reg [15:0] b;
+reg cin;
+
+wire [15:0] sum;
+wire carry;
+
+
+ripple_16 dut(
+    .a(a),
+    .b(b),
+    .cin(cin),
+    .sum(sum),
+    .carry(carry)
+);
+
+initial begin
+    
+    a = 16'd10; 
+    b = 16'd5; 
+    cin = 0;
+    #10;
+
+    
+    a = 16'd100; 
+    b = 16'd50; 
+    cin = 0;
+    #10;
+
+    
+    a = 16'd65535; 
+    b = 16'd1; 
+    cin = 0;
+    #10;
+
+   
+    a = 16'd1234; 
+    b = 16'd4321; 
+    cin = 1;
+    #10;
+
+
+    a = 16'hAAAA;
+    b = 16'h5555;
+    cin = 0;
+    #10;
+
+    $stop;
+end
+
+initial begin
+    $monitor("Time=%0t | a=%d | b=%d | cin=%b | sum=%d | carry=%b",
+              $time, a, b, cin, sum, carry);
+end
+
+endmodule
